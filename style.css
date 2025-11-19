@@ -1,4 +1,3 @@
-/* ---- Ödeme Sayfası (odeme.html) özel stiller ---- */
 .payment-container {
     max-width: 600px;
     margin: 50px auto;
@@ -108,13 +107,10 @@
     font-size: 14px;
 }
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
-/* ------------------- */
-        /* --- TEMEL CSS --- */
-        /* ------------------- */
         body {
             font-family: Arial, sans-serif;
-            background-color:  #10101e; /* Koyu arkaplan */
-            color: #afaff9; /* Açık renk yazı */
+            background-color:  #10101e; 
+            color: #afaff9;
             margin: 0;
             padding: 0;
         }
@@ -125,35 +121,27 @@
             margin-top: auto;
             margin-right: 10px;
         }
-        /* 1. Yeni oluşturduğumuz ana taşıyıcı */
          .page-content-wrapper {
           display: flex;
-          /* Dikeyde en üste hizala (eğer biri kısaysa) */
-          gap: 5px; /* Aradaki boşluk */
+          gap: 5px;
           margin-top: 10px;
           margin-left: 10px;
           margin-bottom: 10px;
         }
 
-        /* 2. Sol filtre menüsü */
         .filter-sidebar {
-          /* Sabit 250px genişlik ver */
           flex-basis: 220px;
-          /* Ekran küçülse bile 250px'den fazla küçülmesin */
           flex-shrink: 0;
           background-color: #1c1c2b;
           padding: 15px;
           border-radius: 8px;
         }
 
-        /* 3. Sağ item listesi */
         .item-grid-container {
-          /* Kalan tüm boşluğu doldursun */
           flex-grow: 1;
         }
 
         .filter-group {
-        /* Her filtre grubu arasına boşluk koy */
           margin-bottom: 20px;
           border-bottom: 1px solid #000000;
           padding-bottom: 15px;
@@ -172,20 +160,18 @@
           margin-bottom: 10px;
           border-bottom: 1px solid #000000;
           padding-bottom: 10px;
-          /* İki kutu arasına boşluk eklemek isterseniz (isteğe bağlı): */
           gap: 20px; 
         }
 
         .fiyat-tire {
-          color: #ccc; /* Yazı rengi (diğerleriyle aynı) */
-          font-size: 1.2em; /* Biraz büyük ve belirgin olsun */
+          color: #ccc; 
+          font-size: 1.2em; 
           font-weight: bold;
           margin-left: 8px;
           margin-right: 8px;
           margin-top: 10px;
         }
 
-        /* Input'lar ve Select'ler tam genişlikte olsun */
         .filter-sidebar input[type="text"],
         .filter-sidebar select {
           width: 100%;
@@ -194,12 +180,12 @@
           border: 1px solid #444;
           color: white;
           border-radius: 4px;
-          box-sizing: border-box; /* Padding'in genişliği bozmamasını sağlar */
+          box-sizing: border-box;
           margin-top: 5px;
         }
 
         .filter-sidebar label {
-          display: block; /* Checkbox'ların alt alta durması için */
+          display: block; 
           color: #ccc;
           margin-top: 8px;
           cursor: pointer;
@@ -208,7 +194,7 @@
         .filter-apply-button {
           width: 100%;
           padding: 10px;
-          background-color: #00ff96; /* "Hızlı Sat" gibi parlak yeşil */
+          background-color: #00ff96; 
           color: #1a1a2e;
           border: none;
           border-radius: 4px;
@@ -217,7 +203,6 @@
           text-align: center;
         }
 
-        /* Navbar genel alan */
           .navbar {
           display: flex;
           align-items: center;
@@ -225,7 +210,6 @@
           padding: 30px 200px;
         }
 
-        /* Butonlar */
         .nav-buttons .btn {
          text-decoration: none;
          color: #d4f0f9ca;
@@ -237,7 +221,6 @@
          font-weight: bolder;
         }
 
-        /* Market butonu hover */
         .nav-buttons .btn.market {
          color: #007bff;
          transform: scale(1.05);
@@ -257,10 +240,6 @@
          transform: scale(1.05);
         }
 
-
-        /* ------------------- */
-        /* 1. ANA NAVİGASYON (Bıçak, Eldivenler, vb.) */
-        /* ------------------- */
         #main-nav {
             background-color: #10101e;
             padding: 5px 0;
@@ -268,16 +247,15 @@
             border-top: 1px solid #555555;
         }
 
-                /* Butonu ve linkleri kapsayan ul etiketi */
         #main-nav .container {
-            display: flex;       /* Elemanları yan yana dizer */
-            align-items: center; /* Dikeyde ortalar */
-            width: 90%;         /* Tam genişlik kaplamasını sağlar */
+            display: flex;      
+            align-items: center; 
+            width: 90%;        
             margin-left: 0%;
         }
 
         #main-nav ul {
-            display: flex; /* Menü öğelerini yan yana diz */
+            display: flex; 
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -291,13 +269,13 @@
             text-decoration: none;
             padding: 15px 15px;
             font-weight: bold;
-            cursor: pointer; /* Tıklanabilir olduğunu belirt */
+            cursor: pointer;
         }
         #main-nav li :hover {
             color: #007bff;
         }
 
-        #main-nav li a.active { /* Aktif sekmeyi vurgula */
+        #main-nav li a.active { 
          color: #007bff;
          transform: scale(1.0);
          font-weight: bold;
@@ -321,14 +299,11 @@
               font-size: 18px;
         }
 
-        /* ------------------- */
-        /* 2. ALT NAVİGASYON (Bayonet, Bowie, vb.) */
-        /* ------------------- */
         .sub-nav {
             background-color: #10101e;
             padding: 0px 0;
-            overflow-x: auto; /* Yatayda kaydırma */
-            white-space: nowrap; /* Öğelerin alt satıra kaymasını engelle */
+            overflow-x: auto; 
+            white-space: nowrap; 
         }
 
         .sub-nav ul {
@@ -352,36 +327,26 @@
             color: #d4f0f9ca;
         }
 
-        /* ------------------- */
-        /* 3. İÇERİK ALANI (Tüm sekmelerin içeriği) */
-        /* ------------------- */
         .content-section {
-            display: none; /* JavaScript ile gösterilene kadar tüm içerikleri gizle */
+            display: none; 
             padding: 20px 0;
         }
 
         .content-section.active {
-            display: block; /* Sadece 'active' class'ı olanı göster */
+            display: block; 
         }
 
-        /* ------------------- */
-        /* 4. ÜRÜN GRİDİ (Kartlar) */
-        /* ------------------- */
         .item-grid {
             display: grid;
-            /* Esnek bir grid sistemi: 
-              - En az 200px genişliğinde kartlar sığdır.
-              - Kalan boşluğu eşit paylaştır (1fr).
-            */
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px; /* Kartlar arası boşluk */
+            gap: 10px; 
         }
 
         .item-card {
             background-color: #1c1c2b;
             height: 300px;
             border-radius: 10px;
-            overflow: hidden; /* Resmin köşelerden taşmasını engelle */
+            overflow: hidden;
             transition: transform 0.2s;
             cursor: pointer;
         }
@@ -392,8 +357,8 @@
 
         .item-card img {
             width: 63%;
-            height: 100px; /* Resim yüksekliğini sabitle */
-            object-fit: cover; /* Resmi kırp ama sığdır */
+            height: 100px;
+            object-fit: cover; 
             padding-left: 45px;
             padding-top: 30px;
         }
@@ -405,7 +370,7 @@
         .item-card-info h3 {
             font-size: 1em;
             margin: 0 0 10px 0;
-            white-space: nowrap; /* Taşan yazıyı gizle */
+            white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -440,8 +405,6 @@
           right: 16px;
           z-index: 9999;
         }
-
-        /* Steam buton stili */
         .steam-btn {
           display: inline-flex;
           align-items: center;
@@ -452,13 +415,12 @@
           font-weight: 600;
           font-size: 14px;
           color: #fff;
-          background: linear-gradient(180deg, #2a333d 0%, #171a21 100%); /* Steam tarzı koyu ton */
+          background: linear-gradient(180deg, #2a333d 0%, #171a21 100%);
           box-shadow: 0 6px 18px rgba(23,26,33,0.35);
           border: 1px solid rgba(255,255,255,0.04);
           transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
           -webkit-tap-highlight-color: transparent;
         }
-
         .steam-btn:hover,
         .steam-btn:focus {
           transform: translateY(-2px);
@@ -466,29 +428,24 @@
           opacity: 0.98;
           outline: none;
         }
-
         .steam-btn:active {
           transform: translateY(0);
         }
-
-        /* Basit Steam logosu (SVG) boyutlandırma */
         .steam-logo {
           width: 15px;
           height: 15px;
           display: inline-block;
           flex-shrink: 0;
         }
-
-        /* Küçük ekranlarda boyutu küçült */
         @media (max-width: 420px) {
           .steam-btn { padding: 8px 10px; font-size: 13px; border-radius: 8px; }
           .steam-logo { width: 15px; height: 15px; }
         }
 
         .site-logo {
-          position: absolute;             /* Kaydırınca yerinde kalır */
-          top: 20px;                   /* Üstten boşluk */
-          left: 2px;                  /* Soldan boşluk */
+          position: absolute;           
+          top: 20px;               
+          left: 2px;               
           display: flex;
           align-items: center;
           gap: 10px;
@@ -497,48 +454,41 @@
         }
 
         .site-logo img {
-        width: 50px;                 /* Logonun boyutu */
+        width: 50px;              
         height: auto;
         transition: transform 0.2s ease;
         }
 
           .site-logo span {
-          color: #ffcc00;              /* CS2 tarzı altın sarısı */
-          font-family: 'Orbitron', sans-serif; /* Oyun tarzı yazı tipi (Google Fonts’tan eklenebilir) */
+          color: #ffcc00;             
+          font-family: 'Orbitron', sans-serif; 
           font-size: 14px;
           font-weight: 500;
           letter-spacing: 1px;
         }
-
-          /* İkonun kendisi */
           .nav-icon {
             height: auto;
-            width: 20px;  /* İkon boyutu (istediğiniz gibi ayarlayın) */
-            margin-right: 5px; /* İkon ile yazı arasındaki boşluk */
+            width: 20px; 
+            margin-right: 5px; 
           }
 
-                /* --- SEPET PENCERESİ --- */
           .cart-sidebar {
               position: fixed;
               top: 0;
-              right: -400px; /* Başlangıçta ekranın sağından 400px dışarıda (GİZLİ) */
+              right: -400px; 
               width: 350px;
-              height: 100%; /* Tüm ekran boyu */
-              background-color: #202030; /* Sitenin arka plan rengi */
-              box-shadow: -5px 0 15px rgba(0,0,0,0.5); /* Sol tarafa gölge */
-              transition: right 0.3s ease; /* Kayma efekti hızı */
-              z-index: 9999; /* Her şeyin üstünde olsun */
+              height: 100%; 
+              background-color: #202030;
+              box-shadow: -5px 0 15px rgba(0,0,0,0.5); 
+              transition: right 0.3s ease; 
+              z-index: 9999; 
               display: flex;
               flex-direction: column;
               border-left: 1px solid #444;
           }
-
-          /* Bu sınıf JavaScript ile eklendiğinde sepet görünür olacak */
           .cart-sidebar.active {
-              right: 0; /* Yerine gel */
+              right: 0;
           }
-
-          /* --- İÇERİK STİLLERİ --- */
           .cart-header {
               padding: 20px;
               background-color: #1a1a2e;
@@ -564,20 +514,15 @@
               overflow-y: auto; 
               overflow-x: hidden; 
           }
-          /* Kaydırma çubuğunun genişliği */
           .cart-items-container::-webkit-scrollbar {
               width: 8px;
           }
-
-          /* Çubuğun arkasındaki yol (Track) */
           .cart-items-container::-webkit-scrollbar-track {
-              background: #1a1a2e; /* Sitenin koyu arka plan rengi */
+              background: #1a1a2e;
           }
-
-          /* Tutup çektiğimiz çubuk (Thumb) */
           .cart-items-container::-webkit-scrollbar-thumb {
-              background: #9c9b9b; /* Çubuğun rengi (Koyu gri) */
-              border-radius: 4px; /* Kenarları yuvarlat */
+              background: #9c9b9b;
+              border-radius: 4px; 
           }
 
 
@@ -599,24 +544,22 @@
           .checkout-btn {
               width: 100%;
               padding: 12px;
-              background-color: #00ff96; /* Senin yeşil buton rengin */
+              background-color: #00ff96; 
               border: none;
               border-radius: 5px;
               font-weight: bold;
               cursor: pointer;
               color: #1a1a2e;
           }
-
-          /* --- ARKA PLAN KARARTMA (OVERLAY) --- */
           .cart-overlay {
               position: fixed;
               top: 0;
               left: 0;
               width: 100%;
               height: 100%;
-              background-color: rgba(0,0,0,0.5); /* Yarı saydam siyah */
-              z-index: 9998; /* Sepetin hemen altında */
-              display: none; /* Başlangıçta gizli */
+              background-color: rgba(0,0,0,0.5);
+              z-index: 9998; 
+              display: none; 
               opacity: 0;
               transition: opacity 0.3s ease;
           }
@@ -625,39 +568,32 @@
               display: block;
               opacity: 1;
           }
-
-          /* --- MODAL ARKA PLAN (KARARTMA) --- */
 .product-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Koyu siyah transparan */
-    z-index: 10000; /* En üstte */
-    display: none; /* Gizli */
-    backdrop-filter: blur(1px); /* Arka planı bulanıklaştırır */
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 10000; 
+    display: none;
+    backdrop-filter: blur(1px); 
 }
-
-/* --- MODAL KUTUSU --- */
 .product-modal {
     position: fixed;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 1300px;
     max-width: 95%;
-    background-color: #1b1b2f; /* Koyu lacivert arka plan */
+    background-color: #1b1b2f;
     border-radius: 12px;
     z-index: 10001;
-    display: none; /* Gizli */
+    display: none;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     padding: 30px;
     color: white;
 }
-
-/* Görünür Yapma Sınıfı */
 .product-modal.active, .product-modal-overlay.active {
     display: block;
 }
 
-/* Kapatma Butonu */
 .close-modal-btn {
     position: absolute;
     top: 15px; right: 20px;
@@ -668,11 +604,9 @@
 
 .modal-body {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Sol geniş, sağ biraz daha dar */
+    grid-template-columns: 1.2fr 1fr; 
     gap: 40px;
 }
-
-/* --- SOL TARAF --- */
 .modal-left img {
     width: 100%;
     max-height: 530px;
@@ -692,7 +626,7 @@
     font-size: 14px;
 }
 .modal-badge {
-    background: #00c853; /* Yeşil badge */
+    background: #00c853;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -701,14 +635,10 @@
     margin-bottom: 10px;
     font-weight: bold;
 }
-
-/* --- SAĞ TARAF --- */
 .modal-right h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-
-/* Float Bar Görünümü (CSS ile Çizim) */
 .float-bar-container {
     background: #252535;
     padding: 15px;
@@ -717,7 +647,7 @@
 }
 .float-bar {
     height: 6px;
-    background: linear-gradient(to right, #4caf50, #ffeb3b, #ff9800, #f44336); /* Renk skalası */
+    background: linear-gradient(to right, #4caf50, #ffeb3b, #ff9800, #f44336); 
     border-radius: 3px;
     margin: 10px 0;
     position: relative;
@@ -753,7 +683,7 @@
 .modal-add-cart-btn {
     width: 100%;
     padding: 15px;
-    background: #6c5ce7; /* Mor renk */
+    background: #6c5ce7; 
     color: white;
     border: none;
     border-radius: 6px;
@@ -764,50 +694,40 @@
 .modal-add-cart-btn:hover {
     background: #5a4abf;
 }
-
-/* Sepet Butonu Temel Hali */
 .cart-btn {
-    /* Mevcut stilin korunuyor */
-    background-color: #30304a; /* Senin buton rengin */
+    background-color: #30304a; 
     color: white;
     border: none;
     padding: 10px 12px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 18px;
-    
-    /* --- YENİ EKLENENLER --- */
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease; /* Yumuşak geçiş için */
-    height: 45px; /* Sabit yükseklik iyidir */
+    transition: all 0.3s ease; 
+    height: 45px; 
 }
 
-/* Fiyat Yazısının Stili (Başlangıçta Gizli) */
 .nav-cart-price {
     font-size: 15px;
     font-weight: bold;
-    color: #fefefe; /* Senin yeşil rengin */
-    
-    /* Gizleme Ayarları */
+    color: #fefefe; 
     max-width: 0;
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
-    transition: all 0.3s ease; /* Yazının yavaşça gelmesi için */
+    transition: all 0.3s ease; 
 }
-
-/* --- SEPET DOLUYKEN (.has-items sınıfı geldiğinde) --- */
 .cart-btn.has-items {
-    padding-right: 15px; /* Sağdan biraz daha boşluk bırak */
-    background-color: #40405a; /* Doluyken renk biraz değişsin (isteğe bağlı) */
+    padding-right: 15px; 
+    background-color: #40405a; 
 }
 
 .cart-btn.has-items .nav-cart-price {
-    max-width: 100px; /* Genişlemesine izin ver */
-    opacity: 1; /* Görünür yap */
-    margin-left: 10px; /* İkonla arasına boşluk koy */
+    max-width: 100px; 
+    opacity: 1; 
+    margin-left: 10px; 
 }
           
 
