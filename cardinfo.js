@@ -160,6 +160,25 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 		}
 	}
+
+// --- SEPETİ BOŞALT BUTONU (Onaysız - Direkt Siler) ---
+const clearCartBtn = document.getElementById('clearCartBtn');
+
+if (clearCartBtn) {
+    clearCartBtn.addEventListener('click', function() {
+        
+        // 1. Sepet zaten boşsa hiçbir şey yapma
+        if (cart.length === 0) {
+            return; 
+        }
+
+        // 2. HİÇBİR ŞEY SORMADAN DİREKT SİL
+        cart = []; // Sepet dizisini boşalt
+        saveCart(); // LocalStorage'daki veriyi sil
+        updateCartHTML(); // Ekranı güncelle (temizle)
+        
+    });
+}
 	const modal = document.getElementById('productModal');
 	const modalOverlay = document.getElementById('productModalOverlay');
 	const closeModalBtn = document.querySelector('.close-modal-btn');

@@ -207,7 +207,7 @@
           display: flex;
           align-items: center;
           background-color: #10101e;
-          padding: 30px 200px;
+          padding: 20px 200px;
         }
 
         .nav-buttons .btn {
@@ -728,6 +728,34 @@
     max-width: 100px; 
     opacity: 1; 
     margin-left: 10px; 
+}
+
+/* Sepeti Boşalt Butonu */
+.clear-cart-btn {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px; /* Altındaki toplam tutarla arasına boşluk */
+    
+    background-color: transparent; /* Arkası şeffaf */
+    border: 1px solid #ff4444; /* Kırmızı kenarlık */
+    color: #ff4444; /* Kırmızı yazı */
+    
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* İkon ile yazı arası boşluk */
+}
+
+/* Üzerine gelince içi dolsun */
+.clear-cart-btn:hover {
+    background-color: #ff4444;
+    color: white;
 }
           
 

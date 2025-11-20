@@ -7,6 +7,8 @@
     <title>CS2SkinMarket</title>
     <link rel="icon" href="images/kelebek.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
     
     <style></style>
 </head>
@@ -17,6 +19,12 @@
   <div class="nav-buttons">
     <a href="#" class="btn market">Market</a>
     <a href="#" class="btn fastsell"> <img src="images/flash.png" class="nav-icon"></i>Hızlı Sat</a>
+    <a class="steam-btn"
+    href="https://steamcommunity.com/login/home/?goto="
+    aria-label="Steam ile giriş yap">
+    <img src="images/steam_logo_15x15.png" alt="steam logo">
+    <span>Steam ile giriş yap</span>
+    </a>
   </div>
    </div>
 
@@ -28,13 +36,7 @@
 
     
 
-        <a class="steam-btn"
-             href="https://steamcommunity.com/login/home/?goto="
-             aria-label="Steam ile giriş yap">
-            <img src="images/steam_logo_15x15.png" alt="steam logo">
-            <span>Steam ile giriş yap</span>
-        </a>
-  </div>
+
 
   
 
@@ -2078,6 +2080,9 @@
                         </div>
 
                         <div class="cart-footer">
+                            <button id="clearCartBtn" class="clear-cart-btn">
+                            <i class="fas fa-trash"></i> Sepeti Boşalt
+                            </button>
                             <div class="cart-total">
                                 <span>Toplam:</span>
                                 <span>₺ 0.00</span>
