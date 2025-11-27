@@ -122,6 +122,54 @@ document.addEventListener("DOMContentLoaded", function() {
 			addToCart(product);
 		}
 	});
+
+    // Global event listener for Product Cards (Modal + Animation)
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('.item-card');
+        if (card && !e.target.closest('.add-to-cart')) {
+            // 1. Grow Animation
+            card.classList.add('click-grow');
+            setTimeout(() => {
+                card.classList.remove('click-grow');
+            }, 200);
+
+            // 2. Open Modal
+            const img = card.getAttribute('data-img');
+            const name = card.getAttribute('data-name');
+            const price = card.getAttribute('data-price');
+            const float = card.getAttribute('data-float') || 'Belirtilmemiş';
+            const rarity = card.getAttribute('data-rarity') || 'Bilinmiyor';
+            const pattern = card.getAttribute('data-pattern') || '-';
+
+            const modal = document.getElementById('productModal');
+            const modalOverlay = document.getElementById('productModalOverlay');
+            
+            if (modal && modalOverlay) {
+                document.getElementById('modalImage').src = img;
+                document.getElementById('modalTitle').innerText = name;
+                document.getElementById('modalPrice').innerText = '₺ ' + parseFloat(price).toLocaleString('tr-TR');
+                document.getElementById('modalFloat').innerText = float;
+                document.getElementById('modalRarity').innerText = rarity;
+                document.getElementById('modalPattern').innerText = pattern;
+                
+                const modalBtn = document.getElementById('modalAddToCartBtn');
+                if (modalBtn) {
+                    modalBtn.onclick = function() {
+                        addToCart({
+                            id: card.getAttribute('data-id'),
+                            name: name,
+                            price: parseFloat(price),
+                            img: img,
+                            quantity: 1
+                        });
+                    };
+                }
+
+                modal.classList.add('active');
+                modalOverlay.classList.add('active');
+            }
+        }
+    });
 	function addToCart(product) {
 		// Aynı ürün sepette var mı kontrol et
 		const existingItemIndex = cart.findIndex(item => item.id === product.id);
@@ -339,38 +387,7 @@ if (clearCartBtn) {
 	const modal = document.getElementById('productModal');
 	const modalOverlay = document.getElementById('productModalOverlay');
 	const closeModalBtn = document.querySelector('.close-modal-btn');
-	const productCards = document.querySelectorAll('.open-modal-trigger');
-	productCards.forEach(card => {
-		card.addEventListener('click', function(e) {
-			if (e.target.closest('.add-to-cart')) {
-				return; 
-			}
-			const img = this.getAttribute('data-img');
-			const name = this.getAttribute('data-name');
-			const price = this.getAttribute('data-price');
-			const float = this.getAttribute('data-float') || 'Belirtilmemiş';
-			const rarity = this.getAttribute('data-rarity') || 'Bilinmiyor';
-			const pattern = this.getAttribute('data-pattern') || '-';
-			document.getElementById('modalImage').src = img;
-			document.getElementById('modalTitle').innerText = name;
-			document.getElementById('modalPrice').innerText = '₺ ' + parseFloat(price).toLocaleString('tr-TR');
-			document.getElementById('modalFloat').innerText = float;
-			document.getElementById('modalRarity').innerText = rarity;
-			document.getElementById('modalPattern').innerText = pattern;
-			const modalBtn = document.getElementById('modalAddToCartBtn');
-			modalBtn.onclick = function() {
-				addToCart({
-					id: card.getAttribute('data-id'),
-					name: name,
-					price: parseFloat(price),
-					img: img,
-					quantity: 1
-				});
-			};
-			modal.classList.add('active');
-			modalOverlay.classList.add('active');
-		});
-	});
+	// Modal opening logic moved to global delegation
 	function closeProductModal() {
 		modal.classList.remove('active');
 		modalOverlay.classList.remove('active');
@@ -480,59 +497,162 @@ function showFastSellModal(skin) {
 	});
 }
 
-// EKSIK BUTONLARI DÜZELTECEk SCRİPT - BU KOD SAYFA YÜKLENDİĞİNDE ÇALIŞIR
-document.addEventListener("DOMContentLoaded", function() {
-    // Tüm ürün kartlarını bul
-    const itemCards = document.querySelectorAll('.item-card');
-    
-    itemCards.forEach((card, index) => {
-        const cardInfo = card.querySelector('.item-card-info');
-        const existingButton = card.querySelector('.add-to-cart');
-        
-        // Eğer zaten doğru buton varsa geç
-        if (existingButton && existingButton.classList.contains('add-to-cart')) {
-            return;
+// Global variable to store fetched products
+let allProductsData = {};
+
+// Render Products Function
+async function fetchAndRenderProducts() {
+    try {
+        const response = await fetch('http://localhost:3000/api/products');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-        
-        // Hatalı butonları temizle
-        const brokenButtons = card.querySelectorAll('button[href], .eklemebtn:not(.add-to-cart)');
-        brokenButtons.forEach(btn => btn.remove());
-        
-        // Yeni buton oluştur
-        if (cardInfo) {
-            const h3 = cardInfo.querySelector('h3');
-            const p = cardInfo.querySelector('p');
-            const img = card.querySelector('img');
-            
-            if (h3 && p && img) {
-                const productName = h3.textContent.trim();
-                const priceText = p.textContent.replace('₺', '').replace(/\./g, '').replace(',', '.').trim();
-                const price = parseFloat(priceText) || 0;
-                const imageUrl = img.src;
-                const productId = `item_generated_${index}`;
-                
-                // Yeni buton oluştur
-                const newButton = document.createElement('button');
-                newButton.className = 'eklemebtn add-to-cart';
-                newButton.setAttribute('data-id', productId);
-                newButton.setAttribute('data-name', productName);
-                newButton.setAttribute('data-price', price.toString());
-                newButton.setAttribute('data-img', imageUrl);
-                
-                newButton.innerHTML = `
-                    <i class="fas fa-shopping-cart"></i>
-                `;
-                
-                // Butonu kart info'nun sonuna ekle
-                cardInfo.appendChild(newButton);
-            }
-        }
-    });
-    
-    // Event listener artık global olduğu için burada ayrıca eklemeye gerek yok
-    const allButtons = document.querySelectorAll('.add-to-cart');
-    console.log('Toplam ' + allButtons.length + ' buton hazır ve çalışıyor!');
+        allProductsData = await response.json();
+        renderGrid(allProductsData);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
+}
+
+function renderGrid(productsToRender) {
+    // Clear all grids first
+    document.querySelectorAll('.item-grid').forEach(grid => grid.innerHTML = '');
+
+    for (const [sectionId, items] of Object.entries(productsToRender)) {
+        const gridId = sectionId.split('-')[0] + '-grid';
+        const grid = document.getElementById(gridId);
+        if (!grid) continue;
+
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card open-modal-trigger';
+            card.setAttribute('data-id', item.id);
+            card.setAttribute('data-name', item.name);
+            card.setAttribute('data-price', item.price);
+            card.setAttribute('data-img', item.img);
+            card.setAttribute('data-float', item.float);
+            card.setAttribute('data-rarity', item.rarity);
+            card.setAttribute('data-pattern', item.pattern);
+            // Add category for filtering if needed
+            card.setAttribute('data-category', item.category); 
+
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}">
+                <div class="item-card-info">
+                    <h3>${item.name}</h3>
+                    <p>₺ ${item.price.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <button class="eklemebtn add-to-cart" 
+                            data-id="${item.id}" 
+                            data-name="${item.name}" 
+                            data-price="${item.price}" 
+                            data-img="${item.img}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+}
+
+// Filter Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtn = document.querySelector('.filter-apply-button');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            applyFilters();
+        });
+    }
 });
+
+function applyFilters() {
+    if (Object.keys(allProductsData).length === 0) return;
+
+    // 1. Get Filter Values
+    const minPriceInput = document.querySelectorAll('.fiyat-kapsayici input')[0];
+    const maxPriceInput = document.querySelectorAll('.fiyat-kapsayici input')[1];
+    
+    // Parse price inputs (remove currency symbol and dots, replace comma with dot)
+    const parsePrice = (str) => {
+        if (!str) return 0;
+        return parseFloat(str.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
+    };
+
+    const minPrice = parsePrice(minPriceInput.value);
+    const maxPrice = parsePrice(maxPriceInput.value);
+
+    // Get selected categories (checkboxes)
+    // Map the labels to condition names
+    const categoryCheckboxes = document.querySelectorAll('.filter-group input[type="checkbox"]:checked');
+    const selectedConditions = Array.from(categoryCheckboxes).map(cb => cb.parentNode.textContent.trim());
+
+    // Get sort order
+    const sortSelect = document.querySelector('select[name="siralama"]');
+    const sortValue = sortSelect ? sortSelect.value : 'fiyat-dusuk';
+
+    // Helper to get condition from float
+    const getCondition = (floatVal) => {
+        const f = parseFloat(floatVal);
+        if (f >= 0.00 && f <= 0.07) return 'Factory New';
+        if (f > 0.07 && f <= 0.15) return 'Minimal Wear';
+        if (f > 0.15 && f <= 0.38) return 'Field Testing'; // Matches HTML label
+        if (f > 0.38 && f <= 0.45) return 'Well Worn';
+        if (f > 0.45 && f <= 1.00) return 'Battle Scared'; // Matches HTML label
+        return 'Unknown';
+    };
+
+    // 2. Filter Data
+    let filteredData = {};
+
+    for (const [sectionId, items] of Object.entries(allProductsData)) {
+        let filteredItems = items.filter(item => {
+            // Price Filter
+            if (maxPrice > 0) {
+                if (item.price < minPrice || item.price > maxPrice) return false;
+            } else if (minPrice > 0) {
+                 if (item.price < minPrice) return false;
+            }
+
+            // Category/Condition Filter
+            if (selectedConditions.length > 0) {
+                const itemCondition = getCondition(item.float);
+                // Check if the calculated condition matches any selected checkbox label
+                // Also check rarity/name just in case user meant that
+                const matchesCondition = selectedConditions.includes(itemCondition);
+                
+                if (!matchesCondition) return false;
+            }
+
+            return true;
+        });
+
+        // 3. Sort Data
+        filteredItems.sort((a, b) => {
+            if (sortValue === 'fiyat-dusuk') {
+                return a.price - b.price;
+            } else if (sortValue === 'fiyat-yuksek') {
+                return b.price - a.price;
+            }
+            return 0;
+        });
+
+        if (filteredItems.length > 0) {
+            filteredData[sectionId] = filteredItems;
+        }
+    }
+
+    // 4. Render Filtered Data
+    renderGrid(filteredData);
+    console.log('Filters applied', { minPrice, maxPrice, selectedCategories, sortValue });
+}
+
+// Call fetchAndRenderProducts on load
+document.addEventListener("DOMContentLoaded", function() {
+    fetchAndRenderProducts();
+    console.log('Fetching products from API...');
+});
+
+
 
 // Fallback: Eğer hiçbir section aktif değilse, bıçak sayfasını aktif yap
 document.addEventListener('DOMContentLoaded', () => {
